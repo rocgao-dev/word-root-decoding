@@ -1,0 +1,192 @@
+schema_version: 1
+bundle_id: bundle.word-root-decoding
+book:
+  title: 词根动作拆词法
+  author: 未知 UP 主
+  published: 未知
+  source_type: 视频字幕转写
+  source_file: 3602a2da_VID_1178.txt
+entry:
+  name: word-root-decoding
+  description: |
+    当用户想理解或记忆英语单词的词义来源时使用：看到生词想"拆开看"、问"这个词怎么拆/词根词缀什么意思"、想按词根成批记词、或分不清 ject/port、fer/mit/duc 等近义词根时。
+    核心是把词拆成"25 个具象动作词根 + 方向前缀"，用"先找动作再看方向"现场推导词义；覆盖词=动作+方向的模型、生词拆解流程、近义动作手感辨析、词族批量记忆。
+    不适用于：希腊词根词、单音节基础词、拟声词、只需读音拼写用法的场景，或需要权威词源/精确释义的学术与考试答案场景；本技能是助记推导法，不是严格词源学。
+    Triggers: 拆词, 词根, 词缀, 怎么记单词, 近义词根区别, word root, prefix, break down word, decode word, word family。
+  core_principles:
+    - 词 = 一个具象动作词根 + 一个方向前缀，词义是动作被方向修饰后的结果
+    - 记 25 个动作而非 191 个孤立的词，靠推导而非死记
+    - 遇到生词先找动作、再看方向、组合词义，最后校验
+    - 近义动作根靠动作过程的手感差异辨析，不靠中文释义
+    - 一个动作根配方向前缀表可批量成族记忆
+  out_of_scope:
+    - 希腊词根词（photo/tele/geo…）、单音节基础词、拟声词、外来词
+    - 需要严格学术词源或权威标准释义的场景
+    - 单词的读音、拼写、搭配、语域、用法（本技能只解决理解与记忆入口）
+  stop_conditions:
+    - 生词不含 25 个动作根中的任何一个时，停止强行拆解，改用语境/词典
+    - 词根动作感明显不透明（如 effect 效果、object 物体）时，标注存疑而非编造动作故事
+    - 推导出的词义牵强或无法自圆其说时，建议查词典确认
+router_entry:
+  name: word-root-decoding-router
+  description: |
+    来源路由入口：当需要词根动作拆词法（词=动作+方向）相关的任一能力时使用。
+    覆盖拆词模型、生词拆解流程、近义动作手感辨析、词族批量扩展。
+promotion_budget: 8
+capabilities:
+  - capability_id: cap.wordroot.core-model
+    revision: 1
+    status: active
+    aliases: []
+    supersedes: []
+    merged_into: null
+    split_into: []
+    slug: word-decoding-core
+    title: 拆词核心模型：词 = 动作词根 + 方向前缀
+    importance: critical
+    importance_rationale: 全篇地基模型，是其余三张能力卡的前置依赖；覆盖开篇总纲与 25 个词根全部演示段落，篇幅占比最高
+    one_liner: 把词拆成一个具象动作 + 一个方向，词义就是动作被方向修饰后的结果
+    intents:
+      - 理解某个词为什么是这个意思
+      - 询问词根词缀法是什么
+      - 搞懂一族词的构成
+    keywords:
+      - 拆词, 词根, 词缀, 动作, 方向, 词根法
+      - word root, prefix, break down word, why does this word mean
+    also_read:
+      - word-decode-flow
+      - root-feel-discrimination
+    card: cards/word-decoding-core.md
+    frontmatter:
+      description: 用户想理解词根词缀构词、问"这个词怎么拆/为什么这意思"时用；把词拆成动作词根+方向前缀推导词义。不用于希腊根词、拟声词或需权威词源的场景
+      tags: [mental-model, word-decoding, 构词, core]
+    source_evidence:
+      - source_id: src-main-video
+        location: 字幕 L2-9, L997-999
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 地基模型，独立意图与契约明确，被其余能力依赖
+
+  - capability_id: cap.wordroot.decode-flow
+    revision: 1
+    status: active
+    aliases: []
+    supersedes: []
+    merged_into: null
+    split_into: []
+    slug: word-decode-flow
+    title: 生词现场拆解流程：先找动作 → 再看方向 → 组合 → 校验
+    importance: critical
+    importance_rationale: 全篇最可迁移的能力，作者用三道自测题专门验证；是学习者真正要的"遇到生词怎么办"
+    one_liner: 遇到生词先定位动作根，再读前缀方向，组合推义并校验
+    intents:
+      - 遇到没见过的生词想现场推断含义
+      - 想知道怎么拆词/怎么自己推导词义
+      - 想自测是否掌握拆词法
+    keywords:
+      - 生词, 猜词, 拆词步骤, 先找动作再看方向, 推导词义
+      - guess unknown word, decode new word, break down unfamiliar word
+    also_read:
+      - word-decoding-core
+      - root-feel-discrimination
+      - word-family-scaling
+    card: cards/word-decode-flow.md
+    frontmatter:
+      description: 用户遇到生词想现场推导、问"遇到生词怎么办/怎么拆"时用；按先找动作→看方向→组合→校验的顺序推导。不用于不在动作根系统内的词或需权威释义的场景
+      tags: [procedure, reasoning, word-decoding, transferable]
+    source_evidence:
+      - source_id: src-main-video
+        location: 字幕 L1000-1003, L1030-1032
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 独立意图最强（遇到生词怎么办），是核心可执行流程
+
+  - capability_id: cap.wordroot.feel-discrimination
+    revision: 1
+    status: active
+    aliases: []
+    supersedes: []
+    merged_into: null
+    split_into: []
+    slug: root-feel-discrimination
+    title: 近义动作根手感辨析框架
+    importance: high
+    importance_rationale: 18 组对照贯穿全篇，是防混淆的关键痛点；解决中文释义无法区分近义根的实际问题
+    one_liner: 近义动作根靠动作过程的身体手感（起手/持续/离手/受力方向）辨析，不靠中文释义
+    intents:
+      - 分不清两个近义词根的区别
+      - 拆词时在多个动作根之间犹豫
+      - 想系统整理易混词根对照
+    keywords:
+      - 词根区别, 近义词根, 怎么区分, ject port 区别, fer mit 区别
+      - difference between roots, distinguish word roots, similar roots confused
+    also_read:
+      - word-decoding-core
+      - word-decode-flow
+    card: cards/root-feel-discrimination.md
+    frontmatter:
+      description: 用户分不清 ject/port、fer/mit/duc、press/plic 等近义词根、问"这两个根啥区别"时用；用动作手感对照句式辨析。不用于非近义根或需词源学精确区分的场景
+      tags: [discrimination, near-synonyms, 手感, reasoning]
+    source_evidence:
+      - source_id: src-main-video
+        location: 字幕多处对照段落 L52-54 等 18 组
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: true
+        independent_eval: true
+      notes: 独立意图明确（两根本啥区别），触发词与其他卡可分
+
+  - capability_id: cap.wordroot.word-family
+    revision: 1
+    status: active
+    aliases: []
+    supersedes: []
+    merged_into: null
+    split_into: []
+    slug: word-family-scaling
+    title: 词族批量扩展与记忆减负
+    importance: medium
+    importance_rationale: V3 为边界通过（词根记忆法接近常识），但"动作根×方向矩阵批量成族"有实操独特性；服务于规模化复习
+    one_liner: 以一个动作根配方向前缀表，批量生成并记忆整族词，记一个根等于记一串
+    intents:
+      - 想批量记单词/按词根串起来记
+      - 想列全某个词根家族的词
+      - 想复习巩固某类词根
+    keywords:
+      - 批量记单词, 词根串记, 词族, 列同根词, 记一串词
+      - word family, learn words by root, list words with this root, group vocabulary
+    also_read:
+      - word-decoding-core
+      - word-decode-flow
+    card: cards/word-family-scaling.md
+    frontmatter:
+      description: 用户想按词根批量记词、列一族词或复习词根家族时用；以动作根配方向前缀批量成族记忆。不用于只想理解单个词或需精确用法的场景
+      tags: [memory, scale, word-family, 减负]
+    source_evidence:
+      - source_id: src-main-video
+        location: 字幕 L997-999, L1025-1032
+    promotion:
+      destination: promoted
+      gate:
+        independent_intent: true
+        independent_contract: true
+        independent_run: true
+        independent_reuse: false
+        independent_eval: true
+      notes: 独立复用较弱但独立评测通过；按软预算保留为晋级卡

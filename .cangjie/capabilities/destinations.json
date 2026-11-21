@@ -1,0 +1,9 @@
+{
+  "bundle_id": "bundle.word-root-decoding",
+  "destinations": {
+    "cap.wordroot.core-model": {"promoted_to": "word-decoding-core"},
+    "cap.wordroot.decode-flow": {"promoted_to": "word-decode-flow"},
+    "cap.wordroot.feel-discrimination": {"promoted_to": "root-feel-discrimination"},
+    "cap.wordroot.word-family": {"promoted_to": "word-family-scaling"}
+  }
+}

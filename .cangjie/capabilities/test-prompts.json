@@ -1,0 +1,76 @@
+{
+  "skill": "word-root-decoding",
+  "version": "0.1.0",
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "看到 reject 这个词，为什么是'拒绝'的意思？能拆开讲讲吗",
+      "expected_behavior": "激活 word-root-decoding，用 core 卡把 reject 拆成 re(回)+ject(扔)=扔回去=拒绝",
+      "notes": "正面场景：问单个词为什么是这个意思 → core 能力"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "阅读时遇到一个没见过的新单词，有什么办法能现场推断它的意思？",
+      "expected_behavior": "激活 word-root-decoding，走 flow 卡的'先找动作→看方向→组合→校验'流程",
+      "notes": "正面场景：遇到生词怎么办 → flow 能力"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "ject 和 port 老是搞混，这两个词根到底有什么区别？",
+      "expected_behavior": "激活 word-root-decoding，用 feel-discrimination 卡的手感对照：扔一下离手 vs 扛一路走",
+      "notes": "正面场景：近义词根辨析 → feel 能力"
+    },
+    {
+      "id": "should-trigger-04",
+      "type": "should_trigger",
+      "prompt": "有没有办法按词根把一串单词成批记住？比如把 spect 相关的词都列出来",
+      "expected_behavior": "激活 word-root-decoding，用 word-family 卡以 spect 为轴配方向批量生成词族",
+      "notes": "正面场景：批量记词/列词族 → word-family 能力"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "帮我查一下单词 'phenomenon' 的中文意思和音标",
+      "expected_behavior": "纯词典查询，且 phenomenon 不在动作根系统内；不应强行调用拆词技能，直接给出释义或说明查词典",
+      "notes": "诱饵：单纯查词且不属系统覆盖的词"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "这个 Python 函数里的 prefix 参数是什么意思？",
+      "expected_behavior": "编程语境的 prefix，与英语词根无关；不应激活",
+      "notes": "诱饵：关键词 prefix 出现在无关领域"
+    },
+    {
+      "id": "should-not-trigger-03",
+      "type": "should_not_trigger",
+      "prompt": "我要做一份英语词的 Word 文档，怎么排版比较好看？",
+      "expected_behavior": "文档排版任务，与词根拆词无关；不应激活",
+      "notes": "诱饵：出现'英语词'但任务无关"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "effect 这个词用你们的方法怎么拆？我拆成 ef+fect 但感觉意思对不上",
+      "expected_behavior": "可激活，但应按 flow 的判停条件说明：effect 动作感已漂移/不透明，标注存疑并建议以词典为准，不编造牵强动作故事",
+      "notes": "边界：词在系统内但语义不透明，测试判停与诚实标注"
+    },
+    {
+      "id": "edge-02",
+      "type": "edge_case",
+      "prompt": "telephone 这个词怎么拆？tele 是什么意思？",
+      "expected_behavior": "可激活识别为希腊词根词，但应说明超出本技能'25个拉丁动作根'的覆盖范围，转用其他方法",
+      "notes": "边界：希腊词根词，测试边界声明而非硬拆"
+    },
+    {
+      "id": "edge-03",
+      "type": "edge_case",
+      "prompt": "photograph、telephone、geography 这几个词根帮我总结一下",
+      "expected_behavior": "这些是希腊词根（photo/tele/geo），不在本技能覆盖范围；应明确告知超出范围，而不是套拉丁动作根",
+      "notes": "边界+跨系统：整组都是希腊根，测试不硬套"
+    }
+  ]
+}

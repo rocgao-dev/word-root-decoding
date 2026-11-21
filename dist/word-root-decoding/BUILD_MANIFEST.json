@@ -1,0 +1,34 @@
+{
+  "tool": "cangjie-tools v2.5.0",
+  "published_hashes": {
+    "references\\capabilities\\root-feel-discrimination.md": "5cfed402c3ccb1a0e50378cbe32751110e8f43b7ababaa4ac5cb95d2ec085230",
+    "references\\capabilities\\word-decode-flow.md": "2e20ed82363b0753811e7601f444a516f680d48059ac71f464c0fcb020cd7268",
+    "references\\capabilities\\word-decoding-core.md": "a67dac500b5989b02131ba19daa1053e6cc05a565e0a237deedfea831a5979c0",
+    "references\\capabilities\\word-family-scaling.md": "641acf6437a96175ef7aa2053f406de3a22d25237e1dd2e69f48e2608d717b8a",
+    "references\\capability-index.md": "9f9fe29d1f6c1631b1bdf6017f00029500a94623187279a54c79790b5ed808a9",
+    "references\\cheatsheet.md": "8951c576c504178f3605d4afd8ded5a18fa83804b796356085ff1f89a53e1212",
+    "references\\glossary.md": "9591726d3da54a070916adca3f1da6ec37fa26ff23d855d9fdf9368d9c523dfa",
+    "references\\overview.md": "e832416de933791538567c75a7484a7b2e2274a9fef1ef3a2ff5856d1add832e",
+    "SKILL.md": "6daa9a0636c3a78d3d65230cdff7955eaa212693488969c1e0b3d0aeaa10094c"
+  },
+  "note": "update/重编译前比对 published_hashes；检测到本地手改不得静默覆盖",
+  "bundle_id": "bundle.word-root-decoding",
+  "bundle_sha256": "624d2263825c2a76f25bcca95f8d89a6e6942638e7b1f1014fe65be15e54634b",
+  "variant": "single",
+  "run_id": "run-20261121-110547-859743",
+  "decision": {
+    "schema_version": 1,
+    "requested": "single",
+    "selected": "single",
+    "decision_policy": "single-first-v1",
+    "skill_budget": 8,
+    "promoted_count": 4,
+    "capability_count": 4,
+    "reasons": [
+      "用户显式选择 single，auto 决策器不覆盖用户选择"
+    ],
+    "alternative": "compact pack（1 个来源路由入口 + 4 个晋级 Skill，共 5 个可发现入口）",
+    "user_confirmed": true,
+    "preserve_strategy_on_update": true
+  }
+}
